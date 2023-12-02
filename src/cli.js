@@ -4,18 +4,11 @@ const yargs = require('yargs');
 
 yargs
   .command({
-    command: 'hola',
+    command: 'saludar',
     describe: 'Saluda al usuario',
     handler: () => {
-      console.log('¡Hola! Bienvenido a mi CLI. zhaira');
+      console.log('¡Hola! Bienvenido a mi CLI.');
     }
   })
   .help()
   .argv;
-
-
-// module.exports = () => {
-//   // ...
-// };
-
-
