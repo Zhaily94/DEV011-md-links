@@ -14,29 +14,10 @@ const validateTypeMD = markdownExtensions.test(path);
 if (validateLinksUser && validateTypeMD) {
     //
     mdLinks(path)
-    .then(result => console.log("Esta es la ruta", result))
+    .then(result => console.log("Este es el MD \n", result))
     .catch(err => console.error("Este es el error", err))
     
 } else {
     //
     console.log('no existe la ruta')
 }
-
-
-// const route = 'C:/Users/ZhailyAlfa/Desktop/laboratoria-dev/DEV011-md-links/README.md'; 
-
-
-// const yargs = require('yargs');
-
-// yargs
-//   .command({
-//     command: 'saludar',
-//     describe: 'Saluda al usuario',
-//     handler: () => {
-//       console.log('¡Hola! Bienvenido a mi CLI.');
-//     }
-//   })
-//   .help()
-//   .argv;
-
-
