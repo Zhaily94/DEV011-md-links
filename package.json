@@ -41,5 +41,5 @@
     "eslint": "^8.54.0",
     "eslint-plugin-react": "^7.33.2"
   },
-  "type": "module"
+  "type": "commonjs"
 }
