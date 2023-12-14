@@ -1,7 +1,6 @@
 
 // version commonJs
 const { convertPath, readMarkdownRender, findLinks, validateLinks } = require('./functions.js');
-// const { convertPath, readMarkdownRender, findLinks, validateLinks } = require('./functions.js');
 
 function mdLinks(path, validate) {
 
@@ -34,21 +33,6 @@ function mdLinks(path, validate) {
   } else {
     reject(new Error('Error'));
   }
-
-  // if (validate === 'true') {
-  //   return promiseArrayLinks.then((array) => {
-  //     const arrayValidate = validateLinks(array);
-  //     return arrayValidate;
-  //   }).catch((error) => {
-  //     console.error('Error al validar los links:', error);
-  //     throw error;
-  //   });
-  // } else {
-  //   return promiseArrayLinks.catch((error) => {
-  //     console.error('Error al leer el markdown:', error);
-  //     throw error;
-  //   });
-  // }
 }
 
 module.exports = { mdLinks };

@@ -62,6 +62,7 @@ function findLinks(markdownHtml, filePath) {
 //Funcion para validar los links 
 //se crea un nuevo array con .map para guardar el estado y el mensaje de los links 
 function validateLinks(arrayLinks) {  
+  if(arrayLinks) {
   const arrayEdit = arrayLinks.map((obj) => { // se itera cada objeto del array
   // se llama la funcion de axios donde se le manda cada href de cada objeto
     return axios.get(obj.href)
@@ -86,6 +87,7 @@ function validateLinks(arrayLinks) {
       console.error('Error en las solicitudes HTTP:', error);
       throw error;
     });
+  }
 }
 
 module.exports = {
