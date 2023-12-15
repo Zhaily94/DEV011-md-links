@@ -1,5 +1,5 @@
-
-//version commonJs
+#!/usr/bin/env node
+// //version commonJs
 const process = require('process');
 const fs = require('fs');
 const { mdLinks } = require("./index.js");
