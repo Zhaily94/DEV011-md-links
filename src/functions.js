@@ -133,6 +133,30 @@ respuesta = respuesta.concat( 'Total: ', count, '\n' , 'Unique: ', countState);
   return respuesta
 }
 
+function validateStats(arrayLinks) {
+  let count = 0;
+  let countState = 0;
+  let countBroken = 0;
+  let respuesta = '';
+arrayLinks.forEach(link => {
+  if(link.href){
+    count++
+  }
+  if(link.status == 200){
+    countState++
+  }
+  if(link.status >= 400 && link.status <= 405){
+    countBroken++
+  }
+});
+respuesta = respuesta.concat('Total: ', count, '\n' , 'Unique: ', countState, '\n', 'Broken: ', countBroken);
+  return respuesta
+// let r ='';
+// arrayLinks.forEach(item => {
+//   r = r.concat('entro a validate stats', item.status)
+// })
+// return r
+}
 
 module.exports = {
   validatePath,
@@ -143,6 +167,7 @@ module.exports = {
   printLinks,
   validation,
   stats,
+  validateStats,
 };
 
 
