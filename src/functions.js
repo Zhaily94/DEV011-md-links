@@ -113,10 +113,24 @@ function validation(arrayLinks) {
     const title = link.title.substring(0, 50);
     // concatenados += `${file} | ${href} | ${msj} | ${status} | ${title} \n`;
     concatenados = concatenados.concat(file, ' | ', href, ' | ', msj, ' | ', status, ' | ', title, '\n');
-
   });
   return concatenados
-  // return arrayLinks
+}
+
+function stats(arrayLinks) {
+  let count = 0;
+  let countState = 0;
+  let respuesta = '';
+arrayLinks.forEach(link => {
+  if(link.href){
+    count++
+  }
+  if(link.status == 200){
+    countState++
+  }
+});
+respuesta = respuesta.concat( 'Total: ', count, '\n' , 'Unique: ', countState);
+  return respuesta
 }
 
 
@@ -128,6 +142,7 @@ module.exports = {
   validateLinks,
   printLinks,
   validation,
+  stats,
 };
 
 

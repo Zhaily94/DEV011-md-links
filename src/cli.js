@@ -10,6 +10,8 @@ const path = process.argv[2]
 let validate = process.argv[3]
 
 
+
+
 // Comprueba que la ruta existe en el computador
 const validateLinksUser = fs.existsSync(path);
 const markdownExtensions = /\.(md|mkd|mdwn|mdown|mdtxt|mdtext|markdown|text)$/i;

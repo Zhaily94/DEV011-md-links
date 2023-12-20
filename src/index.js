@@ -1,7 +1,6 @@
 
 // version commonJs
-const { resolve } = require('path');
-const { convertPath, readMarkdownRender, findLinks, validateLinks, printLinks, validation } = require('./functions.js');
+const { convertPath, readMarkdownRender, findLinks, validateLinks, printLinks, validation, stats, validateStats } = require('./functions.js');
 
 function mdLinks(path, validate) {
 
@@ -41,18 +40,9 @@ function mdLinks(path, validate) {
         throw error;
       }); 
     case '--validate':
-      // return promiseArrayLinks.then((array) => {
-      //   const arrayValidate = validateLinks(array);
-      //   const validate = validation(arrayValidate);
-      //   return validate;
-      // }).catch((error) => {
-      //   console.error('Error al validar los links:', error);
-      //   throw error;
-      // });
       return promiseArrayLinks.then((array) => {
         return validateLinks(array)
         .then((updatedArray) =>{
-          // console.log('aquiiii ', updatedArray)
           const validate = validation(updatedArray);
           return validate;
         }).catch((error) => {
@@ -60,7 +50,17 @@ function mdLinks(path, validate) {
         throw error;
       });
     });
-
+    case '--stats':
+      return promiseArrayLinks.then((array) => {
+        return validateLinks(array)
+        .then((updatedArray) =>{
+          const validate = stats(updatedArray);
+          return validate;
+        }).catch((error) => {
+        console.error('Error al validar los links:', error);
+        throw error;
+      });
+    });
     default:
       // Acción por defecto si no coincide ningún caso
   }
