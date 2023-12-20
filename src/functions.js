@@ -90,12 +90,26 @@ function validateLinks(arrayLinks) {
   }
 }
 
+function printLinks (arrayLinks, path) {
+  let concatenados = '';
+ arrayLinks.forEach(link => {
+  const file = path.substring(0,50);
+  // const file = link.file.substring(0,50);
+  const href = link.href.substring(0,50);
+  const title = link.title.substring(0,50);
+  concatenados += `${file} | ${href} | ${title} \n`;
+  });
+return concatenados
+}
+
+
 module.exports = {
   validatePath,
   convertPath,
   readMarkdownRender,
   findLinks,
   validateLinks,
+  printLinks,
 };
 
 

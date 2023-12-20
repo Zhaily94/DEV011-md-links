@@ -16,10 +16,7 @@ const markdownExtensions = /\.(md|mkd|mdwn|mdown|mdtxt|mdtext|markdown|text)$/i;
 // Comprueba que extension sea valida
 const validateTypeMD = markdownExtensions.test(path);
 
-if (validate === undefined || validate.trim() === '') {
-    validate ='false';
-  }
-if (validateLinksUser && validateTypeMD && validate) {
+if (validateLinksUser && validateTypeMD) {
     mdLinks(path, validate)
     .then(result => console.log("Este es el MD \n", result))
     .catch(err => console.error("Este es el error", err))
