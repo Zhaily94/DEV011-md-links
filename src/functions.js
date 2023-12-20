@@ -27,9 +27,9 @@ function readMarkdownRender(filePath) {
       }
     });
   })
-  .then((html) => {
-    return html;
-  });
+    .then((html) => {
+      return html;
+    });
 }
 
 function findLinks(markdownHtml, filePath) {
@@ -61,45 +61,62 @@ function findLinks(markdownHtml, filePath) {
 
 //Funcion para validar los links 
 //se crea un nuevo array con .map para guardar el estado y el mensaje de los links 
-function validateLinks(arrayLinks) {  
-  if(arrayLinks) {
-  const arrayEdit = arrayLinks.map((obj) => { // se itera cada objeto del array
-  // se llama la funcion de axios donde se le manda cada href de cada objeto
-    return axios.get(obj.href)
-      .then((response) => {
-  // se crea un elemento status y se le asigna el la propiedad dada de la funcion axios
-        obj.status = response.status;
-        obj.msj = response.statusText;
-        return obj; // Importante devolver el objeto modificado
-      })
-      .catch((err) => {
-        obj.status = !err.response ? 404 : err.response.status;
-        obj.msj = 'fail';
-        return obj; // Importante devolver el objeto modificado
-      });
-  });
-
-  return Promise.all(arrayEdit)
-    .then((updatedArray) => {
-      return updatedArray; // Devolver el array actualizado después de que todas las promesas se resuelvan
-    })
-    .catch((error) => {
-      console.error('Error en las solicitudes HTTP:', error);
-      throw error;
+function validateLinks(arrayLinks) {
+  if (arrayLinks) {
+    const arrayEdit = arrayLinks.map((obj) => { // se itera cada objeto del array
+      // se llama la funcion de axios donde se le manda cada href de cada objeto
+      return axios.get(obj.href)
+        .then((response) => {
+          // se crea un elemento status y se le asigna el la propiedad dada de la funcion axios
+          obj.status = response.status;
+          obj.msj = response.statusText;
+          return obj; // Importante devolver el objeto modificado
+        })
+        .catch((err) => {
+          obj.status = !err.response ? 404 : err.response.status;
+          obj.msj = 'fail';
+          return obj; // Importante devolver el objeto modificado
+        });
     });
+
+    return Promise.all(arrayEdit)
+      .then((updatedArray) => {
+        return updatedArray; // Devolver el array actualizado después de que todas las promesas se resuelvan
+      })
+      .catch((error) => {
+        console.error('Error en las solicitudes HTTP:', error);
+        throw error;
+      });
   }
 }
 
-function printLinks (arrayLinks, path) {
+function printLinks(arrayLinks, path) {
   let concatenados = '';
- arrayLinks.forEach(link => {
-  const file = path.substring(0,50);
-  // const file = link.file.substring(0,50);
-  const href = link.href.substring(0,50);
-  const title = link.title.substring(0,50);
-  concatenados += `${file} | ${href} | ${title} \n`;
+  arrayLinks.forEach(link => {
+    const file = path.substring(0, 50);
+    // const file = link.file.substring(0,50);
+    const href = link.href.substring(0, 50);
+    const title = link.title.substring(0, 50);
+    concatenados += `${file} | ${href} | ${title} \n`;
   });
-return concatenados
+  return concatenados
+}
+
+function validation(arrayLinks) {
+  let concatenados = '';
+  arrayLinks.forEach(link => {
+    //  const file = path.substring(0,50);
+    const file = link.file.substring(0, 50);
+    const href = link.href.substring(0, 50);
+    const msj = link.msj;
+    const status = link.status;
+    const title = link.title.substring(0, 50);
+    // concatenados += `${file} | ${href} | ${msj} | ${status} | ${title} \n`;
+    concatenados = concatenados.concat(file, ' | ', href, ' | ', msj, ' | ', status, ' | ', title, '\n');
+
+  });
+  return concatenados
+  // return arrayLinks
 }
 
 
@@ -110,6 +127,7 @@ module.exports = {
   findLinks,
   validateLinks,
   printLinks,
+  validation,
 };
 
 
