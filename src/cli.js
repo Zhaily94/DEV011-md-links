@@ -9,7 +9,7 @@ const path = process.argv[2]
 // guarda la validacion
 let validate = process.argv[3]
 let stats = process.argv[4]
-validate = validate.trim();
+// validate = validate.trim();
 
 
 

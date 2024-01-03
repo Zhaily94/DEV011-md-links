@@ -6,6 +6,7 @@ const validatePath = require('../src/functions').validatePath;
 const convertPath = require('../src/functions').convertPath;
 const findLinks = require('../src/functions').findLinks;
 const readMarkdownRender = require('../src/functions').readMarkdownRender;
+const printLinks = require('../src/functions').printLinks;
 
 
 // Test para funcion de conversion de ruta
@@ -111,30 +112,38 @@ describe('Deberia validar los links que extrae del markdown', () => {
     const mockResponses = [
       { status: 200, statusText: 'OK' },
       { status: 404, statusText: 'Not Found' },
-      // Agrega más mocks según sea necesario para tus pruebas
     ];
 
     // Configurar Axios para que devuelva las respuestas simuladas
     axios.get.mockImplementationOnce(() => Promise.resolve(mockResponses[0]))
       .mockImplementationOnce(() => Promise.resolve(mockResponses[1]));
-    // Agrega más implementaciones si tienes más enlaces en tu prueba
 
     const arrayLinks = [
       { href: 'https://es.wikipedia.org/wiki/Markdown' },
       { href: 'https://www.npmjs.com/package/markdown-it' },
-      // Agrega más enlaces si es necesario para tus pruebas
     ];
 
     const expectedUpdatedArray = [
       { href: 'https://es.wikipedia.org/wiki/Markdown', status: 200, msj: 'OK' },
       { href: 'https://www.npmjs.com/package/markdown-it', status: 404, msj: 'Not Found' },
-      // Agrega más enlaces actualizados esperados según sea necesario
     ];
 
     // Ejecutar la función y realizar la prueba
     return validateLinks(arrayLinks).then(updatedArray => {
       expect(updatedArray).toEqual(expect.arrayContaining(expectedUpdatedArray));
     });
+  });
+});
+
+// test para la funcion de imprimir los links en caso de que en consola tenga la validacion undefined
+describe('Funcion que imprime una cadena concatenada de links encontrados de un array', () => {
+  it('Deberia retornar los links encontrados en un array, cuando en la consola no tenga ninguna validacion', () => {
+    const path = '/absolute/path/example.md';
+    const arrayLinks = [
+      { href: 'https://es.wikipedia.org/wiki/Markdown', title: 'Markdown es un lenguaje de marcado', file: 'C:\\Users\\ZhailyAlfa\\Desktop\\laboratoria-dev\\DEV011-md-links\\readme-prueba.md', status: 200, msj: 'OK' },
+    ];
+    const expectedOutput = `${path.substring(0, 50)} | ${arrayLinks[0].href.substring(0, 50)} | ${arrayLinks[0].title.substring(0, 50)} \n`;
+    expect(printLinks(arrayLinks, path)).toEqual(expectedOutput);
   });
 });
 

@@ -92,11 +92,10 @@ function validateLinks(arrayLinks) {
 
 function printLinks(arrayLinks, path) {
   let concatenados = '';
-  arrayLinks.forEach(link => {
-    const file = path.substring(0, 50);
-    // const file = link.file.substring(0,50);
-    const href = link.href.substring(0, 50);
-    const title = link.title.substring(0, 50);
+  arrayLinks.forEach(link => {  
+    const file = path  ? path.substring(0, 50) : ''; 
+    const href = link.href ? link.href.substring(0, 50) : ''; 
+    const title = link.title ? link.title.substring(0, 50) : ''; 
     concatenados += `${file} | ${href} | ${title} \n`;
   });
   return concatenados
@@ -151,11 +150,6 @@ arrayLinks.forEach(link => {
 });
 respuesta = respuesta.concat('Total: ', count, '\n' , 'Unique: ', countState, '\n', 'Broken: ', countBroken);
   return respuesta
-// let r ='';
-// arrayLinks.forEach(item => {
-//   r = r.concat('entro a validate stats', item.status)
-// })
-// return r
 }
 
 module.exports = {
