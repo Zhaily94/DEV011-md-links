@@ -92,10 +92,10 @@ function validateLinks(arrayLinks) {
 
 function printLinks(arrayLinks, path) {
   let concatenados = '';
-  arrayLinks.forEach(link => {  
-    const file = path  ? path.substring(0, 50) : ''; 
-    const href = link.href ? link.href.substring(0, 50) : ''; 
-    const title = link.title ? link.title.substring(0, 50) : ''; 
+  arrayLinks.forEach(link => {
+    const file = path ? path.substring(0, 50) : '';
+    const href = link.href ? link.href.substring(0, 50) : '';
+    const title = link.title ? link.title.substring(0, 50) : '';
     concatenados += `${file} | ${href} | ${title} \n`;
   });
   return concatenados
@@ -104,14 +104,12 @@ function printLinks(arrayLinks, path) {
 function validation(arrayLinks) {
   let concatenados = '';
   arrayLinks.forEach(link => {
-    //  const file = path.substring(0,50);
     const file = link.file.substring(0, 50);
     const href = link.href.substring(0, 50);
     const msj = link.msj;
     const status = link.status;
     const title = link.title.substring(0, 50);
-    // concatenados += `${file} | ${href} | ${msj} | ${status} | ${title} \n`;
-    concatenados = concatenados.concat(file, ' | ', href, ' | ', msj, ' | ', status, ' | ', title, '\n');
+    concatenados += `${file} | ${href} | ${msj} | ${status} | ${title} \n`;
   });
   return concatenados
 }
@@ -120,15 +118,15 @@ function stats(arrayLinks) {
   let count = 0;
   let countState = 0;
   let respuesta = '';
-arrayLinks.forEach(link => {
-  if(link.href){
-    count++
-  }
-  if(link.status == 200){
-    countState++
-  }
-});
-respuesta = respuesta.concat( 'Total: ', count, '\n' , 'Unique: ', countState);
+  arrayLinks.forEach(link => {
+    if (link.href) {
+      count++
+    }
+    if (link.status == 200) {
+      countState++
+    }
+  });
+  respuesta = respuesta.concat('Total: ', count, '\n', 'Unique: ', countState);
   return respuesta
 }
 
@@ -137,18 +135,18 @@ function validateStats(arrayLinks) {
   let countState = 0;
   let countBroken = 0;
   let respuesta = '';
-arrayLinks.forEach(link => {
-  if(link.href){
-    count++
-  }
-  if(link.status == 200){
-    countState++
-  }
-  if(link.status >= 400 && link.status <= 405){
-    countBroken++
-  }
-});
-respuesta = respuesta.concat('Total: ', count, '\n' , 'Unique: ', countState, '\n', 'Broken: ', countBroken);
+  arrayLinks.forEach(link => {
+    if (link.href) {
+      count++
+    }
+    if (link.status == 200) {
+      countState++
+    }
+    if (link.status >= 400 && link.status <= 405) {
+      countBroken++
+    }
+  });
+  respuesta = respuesta.concat('Total: ', count, '\n', 'Unique: ', countState, '\n', 'Broken: ', countBroken);
   return respuesta
 }
 
