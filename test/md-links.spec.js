@@ -242,7 +242,7 @@ describe('Funcion que valida los links y muestra el estado de los mismos', () =>
     expect(result).toEqual('Total: 4\nUnique: 2\nBroken: 2');
   });
 
-  it('should return zero stats for empty array', () => {
+  it('Debería devolver cero estadísticas para una matriz vacía', () => {
     const emptyArray = [];
 
     const result = validateStats(emptyArray);
@@ -251,7 +251,7 @@ describe('Funcion que valida los links y muestra el estado de los mismos', () =>
     expect(result).toEqual('Total: 0\nUnique: 0\nBroken: 0');
   });
 
-  it('should handle all links being OK', () => {
+  it('Debería imprimir que todos los enlaces estén bien', () => {
     const allOkLinks = [
       { href: 'https://example.com', status: 200 },
       { href: 'https://test.com', status: 200 },
@@ -263,7 +263,7 @@ describe('Funcion que valida los links y muestra el estado de los mismos', () =>
     expect(result).toEqual('Total: 2\nUnique: 2\nBroken: 0');
   });
 
-  it('should handle all links being broken', () => {
+  it('Debería imprimir que todos los enlaces rotos', () => {
     const allBrokenLinks = [
       { href: 'https://example.com', status: 404 },
       { href: 'https://test.com', status: 405 },
