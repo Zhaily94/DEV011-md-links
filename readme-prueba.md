@@ -8,4 +8,6 @@ jdibyeaniejad cmaisnafji
 
 * [Asíncronía en js](https://carlosazaustre.es/manejando-la-asincronia-en-javascript)
   * [Array - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/)
+  * Usando un módulo como
+  [Markdown-it](https://www.npmjs.com/package/markdown-it)
 

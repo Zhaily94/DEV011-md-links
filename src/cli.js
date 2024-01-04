@@ -8,7 +8,8 @@ const { mdLinks } = require("./index.js");
 const path = process.argv[2]
 // guarda la validacion
 let validate = process.argv[3]
-
+let stats = process.argv[4]
+// validate = validate.trim();
 
 
 
@@ -19,7 +20,7 @@ const markdownExtensions = /\.(md|mkd|mdwn|mdown|mdtxt|mdtext|markdown|text)$/i;
 const validateTypeMD = markdownExtensions.test(path);
 
 if (validateLinksUser && validateTypeMD) {
-    mdLinks(path, validate)
+    mdLinks(path, validate, stats)
     .then(result => console.log("Este es el MD \n", result))
     .catch(err => console.error("Este es el error", err))
 } else {

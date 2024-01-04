@@ -1,8 +1,8 @@
 
 // version commonJs
-const { convertPath, readMarkdownRender, findLinks, validateLinks, printLinks, validation, stats, validateStats } = require('./functions.js');
+const { convertPath, readMarkdownRender, findLinks, validateLinks, printLinks, validation, stats, validateStats} = require('./functions.js');
 
-function mdLinks(path, validate) {
+function mdLinks(path, validate, wordStats) {
 
   const rutaConvertida = convertPath(path);
   const promiseArrayLinks = new Promise((resolve, reject) => {
@@ -16,7 +16,7 @@ function mdLinks(path, validate) {
         reject(error);
       });
   });
-
+if (wordStats == undefined){
   switch (validate) {
     case 'true':
       return promiseArrayLinks.then((array) => {
@@ -63,6 +63,19 @@ function mdLinks(path, validate) {
     });
     default:
       // Acción por defecto si no coincide ningún caso
+  }
+}
+  if (validate == '--validate' && wordStats == '--stats'){
+    return promiseArrayLinks.then((array) => {
+      return validateLinks(array)
+      .then((updatedArray) =>{
+        const validate = validateStats(updatedArray);
+        return validate;
+      }).catch((error) => {
+      console.error('Error al validar los links:', error);
+      throw error;
+    });
+  });
   }
 }
 
