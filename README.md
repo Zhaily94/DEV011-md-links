@@ -29,12 +29,12 @@ Por ende, para el uso óptimo de esta librería, se requiere tener instalados y 
 
 ### Descripción de los archivos del proyecto
 
-* `README.md` con descripción del módulo, instrucciones de instalación/uso,
+* `README.md` archivo markdown con descripcion del módulo, instrucciones de instalación/uso,
   documentación del API y ejemplos. Todo lo relevante para que cualquier
-  developer que quiera usar tu librería pueda hacerlo sin inconvenientes.
-* `index.js`: Desde este archivo debes exportar **una** función (`mdLinks`).
-* `package.json` con nombre, versión, descripción, autores, licencia,
-  dependencias, scripts (pretest, test, ...), main, bin
+  developer que quiera usar la librería pueda hacerlo sin inconvenientes.
+* `index.js`: Desde este archivo debes exportar varias funciones (`mdLinks`).
+* `package.json` contiene el nombre, versión, descripción, autores, licencia,
+  dependencias, scripts, main, bin
 * `.editorconfig` con configuración para editores de texto. Este archivo no se
   debe cambiar.
 * `.eslintrc` con configuración para linter. Este archivo contiene una
@@ -42,19 +42,36 @@ Por ende, para el uso óptimo de esta librería, se requiere tener instalados y 
   como Airbnb deberás modificar este archivo.
 * `.gitignore` para ignorar `node_modules` u otras directorios que no deban
   incluirse en control de versiones (`git`).
-* `test/md-links.spec.js` debe contener los tests unitarios para la función
-  `mdLinks()`. Tu implementación debe pasar estos tests.
+* `test/md-links.spec.js` contiene los tests unitarios para la función
+  `mdLinks()`.
 
 ## Instalacion
+Para la instalacion es necesario crear una carpeta donde se guardara esta libreria y ejecutar el siguiente comando
+
+```shell
+
+npm install Zhaily94/DEV011-md-links
+
+```
+Si todo esta correcto se mostrara de la siguiente forma.
+
+![installed-ok](image-10.png)
+
 ## Funcionamiento
 La estructura del comando es sencilla: se compone del nombre de nuestra librería seguido de la ruta del archivo a analizar. Esta ruta puede ser tanto absoluta como relativa, ya que la librería se encarga de convertirla automáticamente en una ruta absoluta, como lo requiere Node.
-![Comando](image.png)
 
+```shell
+mdlinks .\tu-archivo-markdown.md
+```
 La respuesta generada presenta la ruta del archivo analizado, el enlace identificado y el texto asociado a dicho enlace. Esta estructura de respuesta permite identificar claramente la ubicación del archivo, el enlace encontrado y el texto adjunto al enlace para un análisis detallado.
+
 ![comando-estructura](image-1.png)
 
 Para obtener información detallada sobre los enlaces encontrados, podemos usar la siguiente estructura de comando. Esta nos permite validar los enlaces identificados y obtener datos más específicos sobre su estado y funcionamiento.
-![validar-links-true](image-2.png)
+
+```shell
+mdlinks .\tu-archivo-markdown.md true
+```
 
 Tras ejecutarlo, obtenemos la siguiente respuesta, donde cada objeto presenta propiedades como 'href' (el enlace), el texto descriptivo de cada enlace y la ruta del archivo donde se halló dicho enlace. Esta estructura ofrece información detallada sobre los enlaces encontrados.
 
@@ -68,15 +85,20 @@ Tras ejecutarlo, obtenemos la siguiente respuesta, donde cada objeto presenta pr
 
 Si la validacion es false el resultado que nos arroja es el siguiente
 
+```shell
+mdlinks .\tu-archivo-markdown.md false
+```
   * href: URL encontrada.
-  * text: Texto que aparecía dentro del link (<a>).
+  * text: Texto que aparecía dentro del link.
   * file: Ruta del archivo donde se encontró el link.
 
   ![resultado-validate-false](image-4.png)
 
 Una de las opciones adicionales es utilizar '--validate', que realiza una solicitud HTTP para determinar la funcionalidad del enlace identificado en el markdown. Si el enlace es una redirección y responde con un 'ok', se considera que el enlace está activo y funcionando correctamente.
 
-![comando--validate](image-5.png)
+```shell
+mdlinks .\tu-archivo-markdown.md --validate
+```
 
 Vemos que el output en este caso incluye la palabra ok o fail después de la URL, así como el status de la respuesta recibida a la petición HTTP a dicha URL.
 
@@ -84,8 +106,14 @@ Vemos que el output en este caso incluye la palabra ok o fail después de la URL
 
 Si pasamos la opción --stats el output (salida) será un texto con estadísticas básicas sobre los links.
 
-![comand--stats](image-7.png)
+```shell
+mdlinks .\tu-archivo-markdown.md --stats
+```
 
 También podemos combinar --validate y --stats para obtener estadísticas que necesiten de los resultados de la validación.
+
+```shell
+mdlinks .\tu-archivo-markdown.md --validate --stats
+```
 
 ![command-validate-stats](image-8.png)
